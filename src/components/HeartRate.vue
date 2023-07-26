@@ -59,18 +59,14 @@ const { stop } = pausableWatch(isConnected, (newIsConnected) => {
   stop()
 })
 
-const handleShownHeartRate = () => {
-  shownHeartRate.value = !shownHeartRate.value
-}
 </script>
 
 <template>
-  <div class="relative w-16">
-    <button v-if="isConnected" @click="handleShownHeartRate" class="text-blue-700 absolute top-0 -right-1 z-10">●</button>
-    <img class="w-16" :class="{ 'heart': isConnected && shownHeartRate }" :src="HeartRateShape" alt="" />
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-        <span v-if="isConnected && shownHeartRate" class="text-white text-2xl">{{ heartRateValue }}</span>
-        <button v-if="!isConnected && !shownHeartRate" @click="requestDevice">●</button>
+  <div class="w-36">
+    <div class="bg-slate-900 text-center p-4 rounded-xl text-white">
+        <span v-if="isConnected">heartRate<br></span>
+        <span v-if="isConnected" class="text-white text-2xl">{{ heartRateValue }}</span>
+        <button v-if="!isConnected" @click="requestDevice">●</button>
     </div>
   </div>
 </template>
